@@ -1,0 +1,4 @@
+<div [formGroup]="customForm">
+    <input type="text" formControlName="customInputText">
+    <span class="error" *ngIf="customForm.touched && !customForm.valid">* Please provide details</span>
+</div>

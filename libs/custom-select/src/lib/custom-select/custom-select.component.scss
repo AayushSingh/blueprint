@@ -1,0 +1,19 @@
+select {
+    width: 100%;
+    height: 42px;
+    border-radius: 5px;
+    border: 0;
+    margin: 0 0 0;
+    padding: 0 20px;
+    font-weight: bolder;
+    font-family: "Nunito", sans-serif;
+}
+
+
+.error{
+    display: block;
+    font-weight: 700;
+    font-size: 11px;
+    margin: 10px 0 0;
+    color: #e3342b;
+}

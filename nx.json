@@ -1,0 +1,36 @@
+{
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "blueprint",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "blueprint": {
+      "tags": []
+    },
+    "blueprint-e2e": {
+      "tags": [],
+      "implicitDependencies": ["blueprint"]
+    },
+    "custom-input": {
+      "tags": []
+    },
+    "custom-select": {
+      "tags": []
+    }
+  }
+}

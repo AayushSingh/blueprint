@@ -1,0 +1,7 @@
+<div [formGroup]="customForm">
+    <select formControlName="customInputDropdown">
+        <option [value]="item" *ngFor="let item of data">{{item}}
+        </option>
+    </select>
+    <span class="error" *ngIf="customForm.touched && !customForm.valid">* Please provide details</span>
+</div>

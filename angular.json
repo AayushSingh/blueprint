@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "blueprint",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "blueprint": {
+      "projectType": "application",
+      "root": "apps/blueprint",
+      "sourceRoot": "apps/blueprint/src",
+      "prefix": "blueprint",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/blueprint",
+            "index": "apps/blueprint/src/index.html",
+            "main": "apps/blueprint/src/main.ts",
+            "polyfills": "apps/blueprint/src/polyfills.ts",
+            "tsConfig": "apps/blueprint/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/blueprint/src/favicon.ico",
+              "apps/blueprint/src/assets"
+            ],
+            "styles": ["apps/blueprint/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/blueprint/src/environments/environment.ts",
+                  "with": "apps/blueprint/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "blueprint:build:production"
+            },
+            "development": {
+              "browserTarget": "blueprint:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "blueprint:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/blueprint/src/**/*.ts",
+              "apps/blueprint/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/blueprint"],
+          "options": {
+            "jestConfig": "apps/blueprint/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "blueprint-e2e": {
+      "root": "apps/blueprint-e2e",
+      "sourceRoot": "apps/blueprint-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/blueprint-e2e/cypress.json",
+            "tsConfig": "apps/blueprint-e2e/tsconfig.e2e.json",
+            "devServerTarget": "blueprint:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "blueprint:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/blueprint-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "custom-input": {
+      "projectType": "library",
+      "root": "libs/custom-input",
+      "sourceRoot": "libs/custom-input/src",
+      "prefix": "blueprint",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/custom-input"],
+          "options": {
+            "jestConfig": "libs/custom-input/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/custom-input/src/**/*.ts",
+              "libs/custom-input/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "custom-select": {
+      "projectType": "library",
+      "root": "libs/custom-select",
+      "sourceRoot": "libs/custom-select/src",
+      "prefix": "blueprint",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/custom-select"],
+          "options": {
+            "jestConfig": "libs/custom-select/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/custom-select/src/**/*.ts",
+              "libs/custom-select/src/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

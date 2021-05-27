@@ -1,0 +1,21 @@
+<form (submit)="submitForm($event)" class="parent-form">
+  <h1>Demo Form for NX</h1>
+
+  <h2>Please provide your full name</h2>
+  <blueprint-custom-input (responseData)="responseFromLib($event, 'name_selected')" [isValidated]="isValidated">
+  </blueprint-custom-input>
+
+  <h2>Please select your current city</h2>
+  <blueprint-custom-select (responseData)="responseFromLib($event, 'city_selected')" [isValidated]="isValidated" [data]="cityList">
+  </blueprint-custom-select>
+
+  <h2>Please provide home address</h2>
+  <blueprint-custom-input (responseData)="responseFromLib($event, 'home_address')" [isValidated]="isValidated">
+  </blueprint-custom-input>
+
+  <h2>Please select your country</h2>
+  <blueprint-custom-select (responseData)="responseFromLib($event, 'country_selected')" [isValidated]="isValidated" [data]="countryList">
+  </blueprint-custom-select>
+  
+  <button (click)="submitForm($event)">Submit Form</button>
+</form>
